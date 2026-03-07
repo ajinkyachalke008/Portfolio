@@ -7,7 +7,7 @@ A high-performance, visually stunning personal portfolio built with React.js, Vi
 <img width="1905" height="915" alt="image" src="https://github.com/user-attachments/assets/6825e4e6-36aa-4ef1-a853-b82b893fe6dc" />
 
 
-🛠️ Tech Stack
+**🛠️ Tech Stack**
 Framework: React.js (Vite)
 
 Animations: GSAP (GreenSock Animation Platform) & ScrollTrigger
@@ -18,7 +18,7 @@ Routing & Scroll: React Scroll
 
 Icons: Iconify
 
-🌟 Key Features
+**🌟 Key Features**
 Extreme Performance: Optimized for speed, achieving near-perfect Lighthouse scores.
 
 Advanced Animations: Smooth, buttery transitions and interactive hover effects using GSAP.
@@ -29,14 +29,7 @@ Project Showcase: A dynamic "Works" section featuring 6 diverse projects, from S
 
 Modern Navigation: Custom-built overlay Navbar with scroll-triggered visibility.
 
-Project                  Tech Stack                             Key Highlight 
-Baga               StoreShopify, Liquid, Tailwind       Real-world freelance E-commerce store.
-Omnibuy            Next.js, Tailwind CSS                Complex Mega-Menu & seamless navigation.
-Gaming Hub         React, Vite, Lighthouse              98% Performance score on Lighthouse.
-Social App         React, REST APIs                     Dynamic feed and User Auth logic.
-Campus Control     JS, Bootstrap, CRUD                  Full management system with role-based access.
-Games Reviews      JS (OOP), Fetch API                  Data-driven app using Object-Oriented Programming.
-⚡Performance Optimization
+**⚡Performance Optimization**
  I focused heavily on the "Critical Rendering Path" to ensure the best user experience:
 
  Asset Optimization: Compressed images and used modern formats.
@@ -45,7 +38,7 @@ Games Reviews      JS (OOP), Fetch API                  Data-driven app using Ob
 
  Zero Layout Shift: Carefully managed GSAP animations to prevent CLS.
 
- 🚀 Getting Started
+** 🚀 Getting Started**
     Clone the repository:
 
     Bash
