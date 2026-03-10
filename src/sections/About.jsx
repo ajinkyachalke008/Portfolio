@@ -121,17 +121,12 @@ const About = () => {
   const text = `Passionate about clean architecture
     I build scalable, high-performance solutions
     from prototype to production`;
-  const aboutText = `I am Ajinkya Chalke,
-an EE student at GCE Karad.
-Passionate about building
-AI-driven platforms and
-innovative tech solutions.
-Transforming complex concepts
-into practical digital systems.
-My goal is to combine
-engineering, AI, and research
-to solve real-world problems
-and shape the future.`;
+  const aboutText = `Passionate about turning
+complex technical ideas
+into impactful digital solutions.
+Driven to build innovative systems
+that bridge engineering knowledge
+with real-world applications.`;
   const imgRef = useRef(null);
   useGSAP(() => {
     gsap.to("#about", {
