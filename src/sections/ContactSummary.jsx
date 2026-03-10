@@ -5,6 +5,8 @@ import KineticQuote from "../components/KineticQuote";
 import Marquee from "../components/Marquee";
 
 const ContactSummary = () => {
+  const containerRef = useRef(null);
+
   const items = [
     "let's connect",
     "let's connect",
@@ -15,7 +17,7 @@ const ContactSummary = () => {
   ];
 
   return (
-    <section className="w-full relative z-0 flex flex-col pt-20">
+    <section ref={containerRef} className="w-full relative z-0 flex flex-col justify-center min-h-screen pt-10 pb-10">
       {/* Top L-to-R Marquee */}
       <Marquee
         items={items}
@@ -23,7 +25,7 @@ const ContactSummary = () => {
         reverse={false}
       />
 
-      <KineticQuote />
+      <KineticQuote triggerRef={containerRef} />
 
       {/* Bottom R-to-L Marquee */}
       <Marquee

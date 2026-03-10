@@ -7,7 +7,7 @@ import { loadSlim } from "@tsparticles/slim";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const KineticQuote = () => {
+const KineticQuote = ({ triggerRef }) => {
     const containerRef = useRef(null);
     const line1Ref = useRef(null);
     const line2Ref = useRef(null);
@@ -31,7 +31,7 @@ const KineticQuote = () => {
         // 1. Bi-Directional Horizontal Scroll Tickers (Stabilized & Detailed)
         const tl = gsap.timeline({
             scrollTrigger: {
-                trigger: containerRef.current,
+                trigger: triggerRef ? triggerRef.current : containerRef.current,
                 start: "top center",
                 end: "+=2000", // Longer duration for more "detained" stable feel
                 scrub: 1.2,    // Extra smooth scrub
