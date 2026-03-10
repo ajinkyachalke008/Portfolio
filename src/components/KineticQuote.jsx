@@ -168,7 +168,7 @@ const KineticQuote = () => {
     return (
         <div
             ref={containerRef}
-            className="relative w-full min-h-screen bg-[#070b14] overflow-hidden flex items-center justify-start cursor-crosshair z-0"
+            className="relative w-full min-h-screen bg-white overflow-hidden flex items-center justify-start cursor-crosshair z-0"
             onMouseMove={handleMouseMove}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
@@ -181,7 +181,7 @@ const KineticQuote = () => {
                     options={{
                         particles: {
                             number: { value: 70, density: { enable: true, area: 1000 } },
-                            color: { value: ["#00eaff", "#ffffff"] },
+                            color: { value: ["#00eaff", "#000000"] },
                             links: { enable: false },
                             move: { enable: true, speed: 0.2, direction: "none", random: true, straight: false, outModes: "out" },
                             size: { value: { min: 1, max: 2.5 } },
@@ -204,7 +204,7 @@ const KineticQuote = () => {
                 {/* Layer 1: Base Dark/White Text */}
                 <div
                     ref={baseTextRef}
-                    className="text-[#ffffff] opacity-40 select-none pb-4"
+                    className="text-black opacity-30 select-none pb-4"
                 >
                     {renderTextContent(false)}
                 </div>
