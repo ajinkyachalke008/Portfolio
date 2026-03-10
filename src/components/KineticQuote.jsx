@@ -9,10 +9,10 @@ gsap.registerPlugin(ScrollTrigger);
 
 const KineticQuote = () => {
     const containerRef = useRef(null);
-    const textContainerRef = useRef(null);
-    const baseTextRef = useRef(null);
-    const neonTextRef = useRef(null);
+    const line1Ref = useRef(null);
+    const line2Ref = useRef(null);
     const cursorMaskRef = useRef(null);
+    const baseTextRef = useRef(null);
 
     const [init, setInit] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
@@ -28,9 +28,7 @@ const KineticQuote = () => {
     }, []);
 
     useGSAP(() => {
-        if (!textContainerRef.current) return;
-
-        // 1. Horizontal Scroll Ticker
+        // 1. Bi-Directional Horizontal Scroll Tickers
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: containerRef.current,
@@ -42,24 +40,32 @@ const KineticQuote = () => {
             },
         });
 
-        // Make text fade in initially
-        gsap.set(textContainerRef.current, { opacity: 0, x: "100vw" });
+        // Initial setup for the rows
+        gsap.set([line1Ref.current, line2Ref.current], { opacity: 0 });
+        gsap.set(line1Ref.current, { x: "-100vw" }); // Row 1 starts left
+        gsap.set(line2Ref.current, { x: "100vw" });  // Row 2 starts right
 
-        tl.to(textContainerRef.current, {
+        tl.to([line1Ref.current, line2Ref.current], {
             opacity: 1,
-            duration: 0.1, // Quick fade in
+            duration: 0.1,
         })
-            .to(textContainerRef.current, {
-                x: "-100vw", // Move horizontally across the screen
+            .to(line1Ref.current, {
+                x: "100vw", // Moves from Left to Right
                 ease: "none",
                 duration: 1,
-            });
+            }, 0)
+            .to(line2Ref.current, {
+                x: "-100vw", // Moves from Right to Left
+                ease: "none",
+                duration: 1,
+            }, 0);
 
-        // 2. Infinite Image Shuffle Loop
-        const scrollWidth = 5 * (window.innerWidth / 4 + 24); // Estimated width of 5 cards + gap
+        // 2. Infinite Image Shuffle Loop (Reverse direction: Left to Right)
+        const scrollWidth = 5 * (window.innerWidth / 4 + 24);
+        gsap.set(".image-track", { x: `-${scrollWidth / 2}px` });
         gsap.to(".image-track", {
-            x: `-${scrollWidth / 2}px`,
-            duration: 20,
+            x: "0px",
+            duration: 25,
             repeat: -1,
             ease: "none",
         });
@@ -139,17 +145,17 @@ const KineticQuote = () => {
         }
     };
 
-    const quoteText = "Let’s transform ideas into powerful innovations that shape the future with AJINKYA.";
-    // Finding index of "AJINKYA" to isolate styles
-    const ajinkyaStart = quoteText.indexOf("AJINKYA");
+    const line1Text = "Let’s transform ideas into powerful innovations";
+    const line2Text = "that shape the future with AJINKYA.";
+    const ajinkyaStart = line2Text.indexOf("AJINKYA");
 
-    const renderTextContent = (isNeonLayer = false) => {
+    const renderTextContent = (text, isNeonLayer = false, isLine2 = false) => {
         return (
             <h2 className="flex whitespace-nowrap text-[32px] md:text-[52px] lg:text-[72px] uppercase leading-tight tracking-wider items-center">
-                {quoteText.split("").map((char, index) => {
+                {text.split("").map((char, index) => {
                     const isSpace = char === " ";
-                    // Check if current char is part of the word "AJINKYA"
-                    const isAjinkya = index >= ajinkyaStart && index < ajinkyaStart + 7;
+                    // Only apply Ajinkya styling if it's Line 2 and within range
+                    const isAjinkya = isLine2 && index >= ajinkyaStart && index < ajinkyaStart + 7;
                     const isDot = char === ".";
 
                     let charClasses = "";
@@ -231,27 +237,42 @@ const KineticQuote = () => {
             <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#00eaff]/5 to-transparent opacity-50 blur-[100px] pointer-events-none" />
 
             {/* Ticker Container mapped to Scroll */}
-            <div ref={textContainerRef} className="relative z-10 pl-[50vw] transition-opacity duration-300">
+            <div className="relative z-10 w-full transition-opacity duration-300 pointer-events-none flex flex-col gap-8 md:gap-16">
 
-                {/* Layer 1: Base Dark/White Text */}
-                <div
-                    ref={baseTextRef}
-                    className="text-black opacity-30 select-none pb-4"
-                >
-                    {renderTextContent(false)}
+                {/* Row 1: Left to Right */}
+                <div ref={line1Ref} className="relative">
+                    {/* Base Layer */}
+                    <div ref={baseTextRef} className="text-black opacity-30 select-none">
+                        {renderTextContent(line1Text, false)}
+                    </div>
+                    {/* Neon Layer (Revealed via Mask) */}
+                    <div
+                        className="absolute top-0 left-0 text-[#00eaff] transition-opacity duration-300"
+                        style={{
+                            opacity: isHovered ? 1 : 0,
+                            clipPath: "circle(180px at var(--x, 50%) var(--y, 50%))",
+                        }}
+                    >
+                        {renderTextContent(line1Text, true)}
+                    </div>
                 </div>
 
-                {/* Layer 2: Neon Cyan Highlight Text (Revealed via Clip Path) */}
-                <div
-                    ref={cursorMaskRef}
-                    className="absolute top-0 left-0 pl-[50vw] pb-4 text-[#00eaff] pointer-events-none select-none transition-opacity duration-300"
-                    style={{
-                        opacity: isHovered ? 1 : 0,
-                        // X-Ray circle clipping mask
-                        clipPath: "circle(180px at var(--x, 50%) var(--y, 50%))",
-                    }}
-                >
-                    {renderTextContent(true)}
+                {/* Row 2: Right to Left */}
+                <div ref={line2Ref} className="relative">
+                    {/* Base Layer */}
+                    <div className="text-black opacity-30 select-none">
+                        {renderTextContent(line2Text, false, true)}
+                    </div>
+                    {/* Neon Layer (Revealed via Mask) */}
+                    <div
+                        className="absolute top-0 left-0 text-[#00eaff] transition-opacity duration-300"
+                        style={{
+                            opacity: isHovered ? 1 : 0,
+                            clipPath: "circle(180px at var(--x, 50%) var(--y, 50%))",
+                        }}
+                    >
+                        {renderTextContent(line2Text, true, true)}
+                    </div>
                 </div>
 
             </div>
