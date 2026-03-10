@@ -8,7 +8,7 @@ const About = () => {
   const text = `Passionate about clean architecture
     I build scalable, high-performance solutions
     from prototype to production`;
-  const aboutText = `I am a student at the Government College of Engineering, Karad, with a passion for building digital products that look great and function perfectly. From designing 'Setu', a campus skill-bartering app, to developing the 'EE Zone' platform, I love turning complex ideas into intuitive user experiences. Whether I'm wiring circuits or designing branding for events like the Masur Premier League, I focus on crafting clean, user-centric solutions.`;
+  const aboutText = `I am Ajinkya Chalke, a second-year Electrical Engineering student at Government College of Engineering, Karad, passionate about building AI-driven engineering platforms and innovative technology solutions. I focus on transforming complex technical concepts into practical digital systems, including platforms for electrical simulation, AI-based security, and intelligent engineering tools. My goal is to combine engineering, AI, and research to develop technologies that solve real-world problems and shape the future of innovation.`;
   const imgRef = useRef(null);
   useGSAP(() => {
     gsap.to("#about", {
@@ -36,7 +36,7 @@ const About = () => {
   return (
     <section id="about" className="min-h-screen bg-black rounded-b-4xl">
       <AnimatedHeaderSection
-        subTitle={"Cod with purpose, Built to scale"}
+        subTitle={"Code with purpose, Built to scale"}
         title={"About"}
         text={text}
         textColor={"text-white"}
@@ -46,7 +46,7 @@ const About = () => {
         <img
           ref={imgRef}
           src={mohamedfawzi}
-          alt="mohamed fawzi"
+          alt="Ajinkya Chalke"
           className="w-md rounded-3xl"
         />
         <AnimatedTextLines text={aboutText} className={"w-full"} />
