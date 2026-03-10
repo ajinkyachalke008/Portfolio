@@ -173,6 +173,22 @@ const KineticQuote = () => {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
+            {/* Background Image Collage */}
+            <div className="absolute inset-0 z-0 flex items-center justify-center gap-2 md:gap-6 px-4 md:px-12 opacity-[0.15] pointer-events-none">
+                {[1, 2, 3, 4, 5].map((item, index) => (
+                    <div key={index} className="flex-1 aspect-[3/4] relative rounded-xl overflow-hidden shadow-2xl mix-blend-multiply">
+                        <img
+                            src={`/images/photo${item}.jpg`}
+                            alt={`Ajinkya Achievement ${item}`}
+                            className="object-cover w-full h-full grayscale"
+                            onError={(e) => {
+                                e.target.onerror = null;
+                                e.target.src = `https://placehold.co/600x800/e2e8f0/94a3b8?text=Photo+${item}`;
+                            }}
+                        />
+                    </div>
+                ))}
+            </div>
             {/* Background Particles Layer */}
             {init && (
                 <Particles
