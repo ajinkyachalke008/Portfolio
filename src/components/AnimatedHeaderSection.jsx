@@ -98,15 +98,16 @@ const AnimatedHeaderSection = ({
           </div>
         </div>
       </div>
-      <div className={`relative px-10 ${textColor}`}>
-        <div className="absolute inset-x-0 border-t-2" />
-        <div className="pt-12 sm:pt-16 text-start">
-          <AnimatedTextLines
-            text={text}
-            className={`font-light uppercase value-text-responsive ${textColor}`}
-          />
+      {text && (
+        <div className={`relative px-10 ${textColor}`}>
+          <div className="pt-12 sm:pt-16 text-start">
+            <AnimatedTextLines
+              text={text}
+              className={`font-light uppercase value-text-responsive ${textColor}`}
+            />
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };
