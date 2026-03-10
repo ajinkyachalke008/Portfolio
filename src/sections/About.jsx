@@ -11,24 +11,28 @@ const AnimatedBebasText = ({ text }) => {
 
   useGSAP(() => {
     gsap.from(lineRefs.current, {
-      y: 150,
-      rotationZ: 2,
+      y: "120%",
       opacity: 0,
+      filter: "blur(8px)",
+      scale: 0.95,
+      letterSpacing: "0.25em",
       duration: 1.2,
-      stagger: 0.1,
+      stagger: 0.15,
       ease: "power4.out",
       scrollTrigger: {
         trigger: containerRef.current,
-        start: "top 85%",
+        start: "top 80%",
+        end: "bottom 60%",
+        toggleActions: "play none none reverse",
       },
     });
   }, { scope: containerRef });
 
   return (
-    <div ref={containerRef} className="w-full font-bebas text-[40px] md:text-[60px] lg:text-[80px] leading-[0.85] uppercase text-[#e5e5e0] tracking-wide">
+    <div ref={containerRef} className="w-full font-bebas text-[32px] md:text-[48px] lg:text-[64px] leading-[0.85] uppercase text-[#e5e5e0] tracking-[0.05em]">
       {lines.map((line, index) => (
-        <div key={index} className="overflow-hidden pb-2 -mt-2 pt-2">
-          <div ref={(el) => (lineRefs.current[index] = el)} className="origin-left">
+        <div key={index} className="overflow-hidden pb-2 -mt-2 pt-2 block">
+          <div ref={(el) => (lineRefs.current[index] = el)} className="origin-left block will-change-transform">
             {line}
           </div>
         </div>
