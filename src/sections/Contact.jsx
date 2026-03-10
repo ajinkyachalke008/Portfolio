@@ -4,6 +4,7 @@ import AnimatedHeaderSection from "../components/AnimatedHeaderSection";
 import Marquee from "../components/Marquee";
 import { socials } from "../constants";
 import gsap from "gsap";
+import { Icon } from "@iconify/react";
 
 const AnimatedContactText = ({ text }) => {
   const containerRef = useRef(null);
@@ -27,9 +28,9 @@ const AnimatedContactText = ({ text }) => {
   }, { scope: containerRef });
 
   return (
-    <div ref={containerRef} className="text-[#e5e5e0]/80 text-[20px] md:text-[28px] lg:text-[36px] font-light tracking-wide leading-relaxed mb-16">
+    <div ref={containerRef} className="text-[#e5e5e0]/80 font-bebas text-[28px] md:text-[40px] lg:text-[50px] tracking-wide leading-[0.85] mb-8">
       {lines.map((line, index) => (
-        <div key={index} className="overflow-hidden pb-1">
+        <div key={index} className="overflow-hidden pb-2 -mt-2 pt-2">
           <div ref={(el) => (lineRefs.current[index] = el)} className="will-change-transform">
             {line}
           </div>
@@ -82,36 +83,45 @@ const Contact = () => {
           withScrollTrigger={true}
         />
 
-        <div className="flex flex-col px-10 mb-20 lg:mb-32">
+        <div className="flex flex-col px-10 mb-16 lg:mb-24">
           {/* Animated Description Text */}
           <AnimatedContactText text={bodyText} />
 
           {/* Social Links & Info Grid */}
-          <div className="social-link-container flex flex-col w-full gap-12 text-[#e5e5e0]">
+          <div className="social-link-container flex flex-col w-full gap-8 text-[#e5e5e0]">
 
             <div className="social-link w-full">
               <h2 className="font-bebas text-[30px] md:text-[40px] tracking-wide text-[#8b8b73]">E-mail</h2>
-              <div className="w-full h-px my-4 bg-white/20" />
-              <a href="mailto:ajinkyachalke008@gmail.com" className="text-[20px] md:text-[30px] lg:text-[40px] font-light tracking-wide hover:text-white transition-colors duration-300">
+              <div className="w-full h-px my-2 bg-white/20" />
+              <a href="mailto:ajinkyachalke008@gmail.com" className="font-bebas text-[28px] md:text-[36px] lg:text-[48px] tracking-wide hover:text-white transition-colors duration-300">
                 ajinkyachalke008@gmail.com
               </a>
             </div>
 
             <div className="social-link w-full">
               <h2 className="font-bebas text-[30px] md:text-[40px] tracking-wide text-[#8b8b73]">Social Media & Links</h2>
-              <div className="w-full h-px my-4 bg-white/20" />
+              <div className="w-full h-px my-2 bg-white/20" />
               <div className="flex flex-wrap gap-8 md:gap-12 pt-2">
-                {socials.map((social, index) => (
-                  <a
-                    key={index}
-                    href={social.href !== "#" ? social.href : undefined}
-                    target={social.href !== "#" ? "_blank" : "_self"}
-                    rel="noreferrer"
-                    className="font-bebas text-[28px] md:text-[40px] tracking-wider hover:text-white hover:-translate-y-1 transition-all duration-300"
-                  >
-                    {social.name}
-                  </a>
-                ))}
+                {socials.map((social, index) => {
+                  let iconName = "";
+                  if (social.name === "GitHub") iconName = "mdi:github";
+                  else if (social.name === "LinkedIn") iconName = "mdi:linkedin";
+                  else if (social.name === "Instagram") iconName = "mdi:instagram";
+                  else if (social.name === "CV") iconName = "mdi:file-document-outline";
+
+                  return (
+                    <a
+                      key={index}
+                      href={social.href !== "#" ? social.href : undefined}
+                      target={social.href !== "#" ? "_blank" : "_self"}
+                      rel="noreferrer"
+                      className="flex items-center gap-2 font-bebas text-[28px] md:text-[40px] tracking-wider hover:text-white hover:-translate-y-1 transition-all duration-300"
+                    >
+                      <Icon icon={iconName} className="text-[32px] md:text-[44px]" />
+                      {social.name}
+                    </a>
+                  );
+                })}
               </div>
             </div>
 
