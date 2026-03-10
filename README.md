@@ -1,71 +1,63 @@
-**Modern Portfolio | Frontend Developer**
+# ⚡ Ajinkya's Portfolio
 
-A high-performance, visually stunning personal portfolio built with React.js, Vite, and GSAP. This portfolio isn't just a showcase of projects; it's a demonstration of technical optimization, smooth user experience, and clean code architecture.
+> **Bridging the gap between Electrical Engineering and seamless UI/UX Design.**
 
-<img width="1891" height="914" alt="image" src="https://github.com/user-attachments/assets/3dbbeb50-66b2-4154-9581-f1844e403363" />
-<img width="1899" height="912" alt="image" src="https://github.com/user-attachments/assets/ffbf4eda-5d7b-443f-83a0-b9d7865cd5da" />
-<img width="1905" height="915" alt="image" src="https://github.com/user-attachments/assets/6825e4e6-36aa-4ef1-a853-b82b893fe6dc" />
+A high-performance, visually stunning personal portfolio built with **React.js**, **Vite**, **Three.js**, and **GSAP** — featuring an interactive **Spider-Man symbiote mask** that reveals over your face on hover.
 
+---
 
-**🛠️ Tech Stack**
+## 🕷️ Highlight Feature — Spider-Man Mask Reveal
 
-Framework: React.js (Vite)
+The hero section features a **fully interactive 3D Spider-Man symbiote mask** rendered with `@react-three/fiber`. On hover, the mask sweeps over the face with a dynamic mask animation. The 3D model responds to mouse movement for a parallax effect.
 
-Animations: GSAP (GreenSock Animation Platform) & ScrollTrigger
+---
 
-Styling: Tailwind CSS
+## 🛠️ Tech Stack
 
-Routing & Scroll: React Scroll
+| Category | Technology |
+|---|---|
+| Framework | React 19 + Vite |
+| 3D Rendering | Three.js, `@react-three/fiber`, `@react-three/drei` |
+| Animations | GSAP + ScrollTrigger, Framer Motion |
+| Styling | Tailwind CSS v4 |
+| Scroll | Lenis (smooth scroll) |
+| Icons | Iconify |
+| Responsive | react-responsive |
 
-Icons: Iconify
+---
 
-**🌟 Key Features**
+## 🌟 Key Features
 
-Extreme Performance: Optimized for speed, achieving near-perfect Lighthouse scores.
+- **Interactive 3D Mask** — Spider-Man symbiote overlay on the hero photo using Three.js GLB model
+- **GSAP Animations** — Smooth reveal animations, scan wipe effects, and scroll-triggered transitions
+- **Responsive Design** — Fluid layout from 4K monitors to mobile screens
+- **Background Beams** — Dynamic animated beam effects in the hero section
+- **Performance Optimized** — Vite build, image preloading, code splitting
 
-Advanced Animations: Smooth, buttery transitions and interactive hover effects using GSAP.
+---
 
-Responsive Design: Fully fluid layout that works flawlessly from 4K monitors to mobile screens.
+## 🚀 Getting Started
 
-Project Showcase: A dynamic "Works" section featuring 6 diverse projects, from Shopify stores to complex CRUD systems.
+```bash
+# Clone the repository
+git clone https://github.com/ajinkyachalke008/Portfolio.git
 
-Modern Navigation: Custom-built overlay Navbar with scroll-triggered visibility.
+# Install dependencies
+npm install
 
-**⚡Performance Optimization**
+# Run the development server
+npm run dev
 
- I focused heavily on the "Critical Rendering Path" to ensure the best user experience:
+# Build for production
+npm run build
+```
 
- Asset Optimization: Compressed images and used modern formats.
+---
 
- Code Splitting: Efficient loading of components.
+## 📨 Contact
 
- Zero Layout Shift: Carefully managed GSAP animations to prevent CLS.
+- **GitHub:** [@ajinkyachalke008](https://github.com/ajinkyachalke008)
 
-**🚀 Getting Started**
+---
 
-    Clone the repository:
-
-    Bash
-    git clone https://github.com/MohamedxFawzi/Portfolio.git
-    Install dependencies:
-
-    Bash
-    npm install
-    Run the development server:
-
-    Bash
-    npm run dev
-    Build for production:
-
-    Bash
-    npm run build
-    
-📨 Contact Me
-
-Email: mohamedfawzeix@gmail.com
-
-LinkedIn: Mohamed Fawzi
-
-GitHub: @MohamedxFawzi
-
-⭐️ If you find this project helpful, don't forget to give it a star!
+⭐️ If you like this project, give it a star!
