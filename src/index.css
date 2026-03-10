@@ -87,6 +87,7 @@
   font-style: italic;
   font-display: swap;
 }
+
 @theme {
   --color-primary: #e5e5e0;
   --color-DarkLava: #393632;
@@ -95,12 +96,15 @@
   --font-amiamie: "Amiamie", sans-serif;
   --font-amiamie-round: "Amiamie-Round", sans-serif;
   --font-bebas: "Bebas Neue", sans-serif;
+  --font-antonio: "Antonio", sans-serif;
 
   --animate-marquee: marquee 40s infinite linear;
+
   @keyframes marquee {
     from {
       transform: translateX(0);
     }
+
     to {
       transform: translateX(calc(-100% - var(--gap)));
     }
