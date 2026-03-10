@@ -82,7 +82,7 @@ const AdvancedKineticText = ({ text1, text2 }) => {
 
   const renderKineticLine = (text) => {
     return (
-      <div className="flex flex-wrap gap-x-3 mb-6 font-space text-[26px] md:text-[36px] lg:text-[48px] font-semibold text-white/90 leading-[1.2] tracking-[0.03em]">
+      <div className="flex flex-wrap gap-x-3 mb-6  text-[26px] md:text-[36px] lg:text-[48px] font-semibold text-white/90 leading-[1.2] tracking-[0.03em]">
         {text.split(" ").map((word, i) => (
           <span
             key={i}
@@ -98,7 +98,7 @@ const AdvancedKineticText = ({ text1, text2 }) => {
 
   const renderTypewriterLine = (text) => {
     return (
-      <div className="relative font-inter text-[18px] md:text-[22px] lg:text-[28px] font-normal text-[#8b8b73] leading-[1.4] tracking-wide max-w-4xl">
+      <div className="relative  text-[18px] md:text-[22px] lg:text-[28px] font-normal text-[#8b8b73] leading-[1.4] tracking-wide max-w-4xl">
         {text.split("").map((char, i) => (
           <span key={i} className="typewriter-char opacity-100 hidden">
             {char}

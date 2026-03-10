@@ -125,13 +125,13 @@ const Navbar = () => {
           className="flex flex-col flex-wrap justify-between gap-8 md:flex-row"
         >
           <div className="font-light">
-            <p className="tracking-wider text-white/50 font-bebas text-2xl">E-mail</p>
-            <a href="mailto:ajinkyachalke008@gmail.com" className="font-bebas text-[28px] md:text-[36px] tracking-wide text-pretty hover:text-white transition-colors duration-300">
+            <p className="tracking-wider text-white/50  text-2xl">E-mail</p>
+            <a href="mailto:ajinkyachalke008@gmail.com" className=" text-[28px] md:text-[36px] tracking-wide text-pretty hover:text-white transition-colors duration-300">
               ajinkyachalke008@gmail.com
             </a>
           </div>
           <div className="font-light">
-            <p className="tracking-wider text-white/50 font-bebas text-2xl">Social Media</p>
+            <p className="tracking-wider text-white/50  text-2xl">Social Media</p>
             <div className="flex flex-col flex-wrap md:flex-row gap-x-6 gap-y-2 mt-2">
               {socials.map((social, index) => {
                 let iconName = "";
@@ -144,7 +144,7 @@ const Navbar = () => {
                   <a
                     key={index}
                     href={social.href !== "#" ? social.href : undefined}
-                    className="flex items-center gap-2 font-bebas text-[24px] md:text-[32px] tracking-wider hover:text-white transition-colors duration-300"
+                    className="flex items-center gap-2  text-[24px] md:text-[32px] tracking-wider hover:text-white transition-colors duration-300"
                     target={social.href !== "#" ? "_blank" : "_self"}
                     rel="noreferrer"
                   >

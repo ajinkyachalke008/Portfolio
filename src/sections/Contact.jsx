@@ -28,7 +28,7 @@ const AnimatedContactText = ({ text }) => {
   }, { scope: containerRef });
 
   return (
-    <div ref={containerRef} className="text-[#e5e5e0]/80 font-bebas text-[28px] md:text-[40px] lg:text-[50px] tracking-wide leading-[0.85] mb-8">
+    <div ref={containerRef} className="text-[#e5e5e0]/80  text-[28px] md:text-[40px] lg:text-[50px] tracking-wide leading-[0.85] mb-8">
       {lines.map((line, index) => (
         <div key={index} className="overflow-hidden pb-2 -mt-2 pt-2">
           <div ref={(el) => (lineRefs.current[index] = el)} className="will-change-transform">
@@ -91,15 +91,15 @@ const Contact = () => {
           <div className="social-link-container flex flex-col w-full gap-8 text-[#e5e5e0]">
 
             <div className="social-link w-full">
-              <h2 className="font-bebas text-[30px] md:text-[40px] tracking-wide text-[#8b8b73]">E-mail</h2>
+              <h2 className=" text-[30px] md:text-[40px] tracking-wide text-[#8b8b73]">E-mail</h2>
               <div className="w-full h-px my-2 bg-white/20" />
-              <a href="mailto:ajinkyachalke008@gmail.com" className="font-bebas text-[28px] md:text-[36px] lg:text-[48px] tracking-wide hover:text-white transition-colors duration-300">
+              <a href="mailto:ajinkyachalke008@gmail.com" className=" text-[28px] md:text-[36px] lg:text-[48px] tracking-wide hover:text-white transition-colors duration-300">
                 ajinkyachalke008@gmail.com
               </a>
             </div>
 
             <div className="social-link w-full">
-              <h2 className="font-bebas text-[30px] md:text-[40px] tracking-wide text-[#8b8b73]">Social Media & Links</h2>
+              <h2 className=" text-[30px] md:text-[40px] tracking-wide text-[#8b8b73]">Social Media & Links</h2>
               <div className="w-full h-px my-2 bg-white/20" />
               <div className="flex flex-wrap gap-8 md:gap-12 pt-2">
                 {socials.map((social, index) => {
@@ -115,7 +115,7 @@ const Contact = () => {
                       href={social.href !== "#" ? social.href : undefined}
                       target={social.href !== "#" ? "_blank" : "_self"}
                       rel="noreferrer"
-                      className="flex items-center gap-2 font-bebas text-[28px] md:text-[40px] tracking-wider hover:text-white hover:-translate-y-1 transition-all duration-300"
+                      className="flex items-center gap-2  text-[28px] md:text-[40px] tracking-wider hover:text-white hover:-translate-y-1 transition-all duration-300"
                     >
                       <Icon icon={iconName} className="text-[32px] md:text-[44px]" />
                       {social.name}

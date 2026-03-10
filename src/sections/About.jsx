@@ -81,7 +81,7 @@ const AnimatedBebasTextUltra = ({ text }) => {
   return (
     <div
       ref={containerRef}
-      className="w-full font-bebas text-[24px] md:text-[36px] lg:text-[48px] leading-[0.85] uppercase tracking-[0.05em] perspective-900"
+      className="w-full  text-[24px] md:text-[36px] lg:text-[48px] leading-[0.85] uppercase tracking-[0.05em] perspective-900"
       style={{ perspective: "900px", transformStyle: "preserve-3d" }}
     >
       {lines.map((line, lineIndex) => (
@@ -227,7 +227,7 @@ const About = () => {
           {bioParas.map((para, index) => (
             <p
               key={index}
-              className="bio-para font-space text-[16px] md:text-[18px] lg:text-[20px] text-white/70 leading-[1.8] tracking-wide will-change-[transform,opacity,filter] border-l-2 border-[#00eaff]/40 pl-6 py-2 transition-all duration-500 hover:border-[#7c6cff] hover:text-white/90"
+              className="bio-para  text-[16px] md:text-[18px] lg:text-[20px] text-white/70 leading-[1.8] tracking-wide will-change-[transform,opacity,filter] border-l-2 border-[#00eaff]/40 pl-6 py-2 transition-all duration-500 hover:border-[#7c6cff] hover:text-white/90"
               dangerouslySetInnerHTML={{ __html: renderHighlightedPara(para) }}
             />
           ))}
