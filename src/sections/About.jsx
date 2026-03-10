@@ -16,8 +16,7 @@ const AnimatedBebasTextUltra = ({ text }) => {
       scrollTrigger: {
         trigger: containerRef.current,
         start: "top 85%",
-        end: "bottom 40%",
-        scrub: 0.7,
+        toggleActions: "play none none reverse",
       },
     });
 
