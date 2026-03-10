@@ -41,10 +41,10 @@ const ContactSummary = () => {
       <Marquee items={items} />
       <div className="overflow-hidden font-light text-center contact-text-responsive">
         <p>
-          “ Let’s build an <br />
-          <span className="font-normal">intelligent</span> &{" "}
-          <span className="italic">impactful</span> <br />
-          digital future <span className="text-gold">together</span> “
+          “ Let’s transform ideas into <br />
+          <span className="font-normal">powerful</span> innovations that {" "}
+          <span className="italic">shape</span> the future <br />
+          with <span className="text-gold font-bold">AJINKYA</span>. ”
         </p>
       </div>
       <Marquee
