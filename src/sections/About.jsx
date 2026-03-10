@@ -82,7 +82,7 @@ const AnimatedBebasTextUltra = ({ text }) => {
   return (
     <div
       ref={containerRef}
-      className="w-full font-bebas text-[36px] md:text-[56px] lg:text-[76px] leading-[0.85] uppercase tracking-[0.05em] perspective-900"
+      className="w-full font-bebas text-[24px] md:text-[36px] lg:text-[48px] leading-[0.85] uppercase tracking-[0.05em] perspective-900"
       style={{ perspective: "900px", transformStyle: "preserve-3d" }}
     >
       {lines.map((line, lineIndex) => (
