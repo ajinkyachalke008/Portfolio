@@ -55,7 +55,16 @@ const KineticQuote = () => {
                 duration: 1,
             });
 
-        // 2. Continuous AJINKYA Highlight Pulse
+        // 2. Infinite Image Shuffle Loop
+        const scrollWidth = 5 * (window.innerWidth / 4 + 24); // Estimated width of 5 cards + gap
+        gsap.to(".image-track", {
+            x: `-${scrollWidth / 2}px`,
+            duration: 20,
+            repeat: -1,
+            ease: "none",
+        });
+
+        // 3. Continuous AJINKYA Highlight Pulse
         gsap.to(".keyword-ajinkya", {
             textShadow: "0px 0px 20px rgba(0, 234, 255, 0.8), 0px 0px 30px rgba(0, 234, 255, 0.6)",
             scale: 1.05,
@@ -173,21 +182,28 @@ const KineticQuote = () => {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
-            {/* Background Image Collage */}
-            <div className="absolute inset-0 z-0 flex items-center justify-center gap-2 md:gap-6 px-4 md:px-12 opacity-[0.15] pointer-events-none">
-                {[1, 2, 3, 4, 5].map((item, index) => (
-                    <div key={index} className="flex-1 aspect-[3/4] relative rounded-xl overflow-hidden shadow-2xl mix-blend-multiply">
-                        <img
-                            src={`/images/photo${item}.jpg`}
-                            alt={`Ajinkya Achievement ${item}`}
-                            className="object-cover w-full h-full grayscale"
-                            onError={(e) => {
-                                e.target.onerror = null;
-                                e.target.src = `https://placehold.co/600x800/e2e8f0/94a3b8?text=Photo+${item}`;
-                            }}
-                        />
-                    </div>
-                ))}
+            {/* Background Image Collage Track */}
+            <div className="absolute inset-0 z-0 overflow-hidden flex items-center pointer-events-none">
+                <div className="image-track flex gap-4 md:gap-8 min-w-[200%] opacity-[0.12]">
+                    {[...Array(3)].map((_, loopIdx) => (
+                        <React.Fragment key={loopIdx}>
+                            {[1, 2, 3, 4, 5].map((item, index) => (
+                                <div key={`${loopIdx}-${index}`} className="flex-none w-[20vw] md:w-[15vw] aspect-[3/4] relative rounded-2xl overflow-hidden shadow-2xl mix-blend-multiply transition-transform duration-500 hover:scale-110">
+                                    <img
+                                        src={`/images/photo${item}.jpg`}
+                                        alt={`Ajinkya Achievement ${item}`}
+                                        className="object-cover w-full h-full grayscale"
+                                        onError={(e) => {
+                                            e.target.onerror = null;
+                                            e.target.src = `https://placehold.co/600x800/e2e8f0/94a3b8?text=Photo+${item}`;
+                                        }}
+                                    />
+                                    <div className="absolute inset-0 border border-black/5 rounded-2xl" />
+                                </div>
+                            ))}
+                        </React.Fragment>
+                    ))}
+                </div>
             </div>
             {/* Background Particles Layer */}
             {init && (
