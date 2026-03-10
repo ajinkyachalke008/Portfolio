@@ -94,6 +94,7 @@
   --color-gold: #cfa355;
   --font-amiamie: "Amiamie", sans-serif;
   --font-amiamie-round: "Amiamie-Round", sans-serif;
+  --font-bebas: "Bebas Neue", sans-serif;
 
   --animate-marquee: marquee 40s infinite linear;
   @keyframes marquee {

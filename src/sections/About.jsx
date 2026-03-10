@@ -1,14 +1,56 @@
 import { useRef } from "react";
 import AnimatedHeaderSection from "../components/AnimatedHeaderSection";
-import { AnimatedTextLines } from "../components/AnimatedTextLines";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import mohamedfawzi from "../../public/images/me.jpeg"
+import mohamedfawzi from "../../public/images/me.jpeg";
+
+const AnimatedBebasText = ({ text }) => {
+  const containerRef = useRef(null);
+  const lineRefs = useRef([]);
+  const lines = text.split("\n");
+
+  useGSAP(() => {
+    gsap.from(lineRefs.current, {
+      y: 150,
+      rotationZ: 2,
+      opacity: 0,
+      duration: 1.2,
+      stagger: 0.1,
+      ease: "power4.out",
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top 85%",
+      },
+    });
+  }, { scope: containerRef });
+
+  return (
+    <div ref={containerRef} className="w-full font-bebas text-[40px] md:text-[60px] lg:text-[80px] leading-[0.85] uppercase text-[#e5e5e0] tracking-wide">
+      {lines.map((line, index) => (
+        <div key={index} className="overflow-hidden pb-2 -mt-2 pt-2">
+          <div ref={(el) => (lineRefs.current[index] = el)} className="origin-left">
+            {line}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+};
 const About = () => {
   const text = `Passionate about clean architecture
     I build scalable, high-performance solutions
     from prototype to production`;
-  const aboutText = `I am Ajinkya Chalke, a second-year Electrical Engineering student at Government College of Engineering, Karad, passionate about building AI-driven engineering platforms and innovative technology solutions. I focus on transforming complex technical concepts into practical digital systems, including platforms for electrical simulation, AI-based security, and intelligent engineering tools. My goal is to combine engineering, AI, and research to develop technologies that solve real-world problems and shape the future of innovation.`;
+  const aboutText = `I am Ajinkya Chalke,
+an EE student at GCE Karad.
+Passionate about building
+AI-driven platforms and
+innovative tech solutions.
+Transforming complex concepts
+into practical digital systems.
+My goal is to combine
+engineering, AI, and research
+to solve real-world problems
+and shape the future.`;
   const imgRef = useRef(null);
   useGSAP(() => {
     gsap.to("#about", {
@@ -49,7 +91,7 @@ const About = () => {
           alt="Ajinkya Chalke"
           className="w-md rounded-3xl"
         />
-        <AnimatedTextLines text={aboutText} className={"w-full"} />
+        <AnimatedBebasText text={aboutText} />
       </div>
     </section>
   );
