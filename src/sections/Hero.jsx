@@ -148,7 +148,7 @@ const AdvancedKineticText = ({ text1, text2 }) => {
 
 const Hero = () => {
   const text1 = "Passionate about turning complex technical ideas into impactful digital solutions.";
-  const text2 = "Driven to build innovative systems that bridge engineering knowledge with real-world applications.";
+  const text2 = "I am Ajinkya Chalke, a second-year Electrical Engineering student at GCE Karad, building AI-powered systems that transform complex concepts into real-world solutions.";
 
   return (
     <section
