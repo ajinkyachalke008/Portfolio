@@ -2,6 +2,7 @@ import { useRef } from "react";
 import Marquee from "../components/Marquee";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import KineticQuote from "../components/KineticQuote";
 
 const ContactSummary = () => {
   const containerRef = useRef(null);
@@ -39,13 +40,8 @@ const ContactSummary = () => {
       className="flex flex-col items-center justify-between min-h-screen gap-12 mt-16"
     >
       <Marquee items={items} />
-      <div className="overflow-hidden font-light text-center contact-text-responsive">
-        <p className="leading-relaxed px-4 md:px-8">
-          “ Let’s transform ideas into{" "}
-          <span className="font-normal">powerful</span> innovations that {" "}
-          <span className="italic">shape</span> the future{" "}
-          with <span className="text-gold font-bold">AJINKYA</span>. ”
-        </p>
+      <div className="w-full">
+        <KineticQuote />
       </div>
       <Marquee
         items={items2}
