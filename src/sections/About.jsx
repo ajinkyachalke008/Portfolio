@@ -152,21 +152,56 @@ const About = () => {
       scrollTrigger: { trigger: imgRef.current },
     });
 
-    // Bio paragraphs staggered fade-in
-    gsap.from(".bio-para", {
-      opacity: 0,
-      y: 30,
-      filter: "blur(6px)",
-      duration: 1,
-      stagger: 0.25,
-      ease: "power3.out",
-      scrollTrigger: {
-        trigger: bioRef.current,
-        start: "top 85%",
-        toggleActions: "play none none reverse",
-      },
+    // Bio paragraphs — cinematic staggered entrance
+    const bioItems = containerRef.current?.querySelectorAll
+      ? bioRef.current?.querySelectorAll(".bio-para")
+      : document.querySelectorAll(".bio-para");
+
+    bioItems?.forEach((para, i) => {
+      const direction = i % 2 === 0 ? -60 : 60;
+      gsap.from(para, {
+        opacity: 0,
+        x: direction,
+        y: 40,
+        rotateY: i % 2 === 0 ? 8 : -8,
+        filter: "blur(10px)",
+        duration: 1.4,
+        ease: "expo.out",
+        scrollTrigger: {
+          trigger: para,
+          start: "top 90%",
+          toggleActions: "play none none reverse",
+        },
+      });
+
+      // Glowing left border sweep
+      gsap.from(para, {
+        borderColor: "rgba(0, 234, 255, 0)",
+        duration: 0.8,
+        delay: 0.4,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: para,
+          start: "top 90%",
+          toggleActions: "play none none reverse",
+        },
+      });
     });
   });
+
+  // Highlight keywords
+  const highlightWords = ["Electrical Engineering", "Artificial Intelligence", "AI-powered", "AI-driven", "Government College of Engineering, Karad", "next-generation technologies", "intelligent digital platforms"];
+
+  const renderHighlightedPara = (text) => {
+    let result = text;
+    highlightWords.forEach((word) => {
+      result = result.replace(
+        new RegExp(`(${word})`, "gi"),
+        `<span class="text-[#00eaff] font-semibold">${word}</span>`
+      );
+    });
+    return result;
+  };
 
   return (
     <section id="about" className="min-h-screen bg-black rounded-b-4xl">
@@ -188,14 +223,13 @@ const About = () => {
 
       {/* Detailed Biography */}
       <div ref={bioRef} className="px-10 lg:px-20 pb-20 pt-8">
-        <div className="max-w-5xl mx-auto flex flex-col gap-6">
+        <div className="max-w-5xl mx-auto flex flex-col gap-8">
           {bioParas.map((para, index) => (
             <p
               key={index}
-              className="bio-para font-space text-[16px] md:text-[18px] lg:text-[20px] text-white/70 leading-[1.8] tracking-wide will-change-[transform,opacity,filter]"
-            >
-              {para}
-            </p>
+              className="bio-para font-space text-[16px] md:text-[18px] lg:text-[20px] text-white/70 leading-[1.8] tracking-wide will-change-[transform,opacity,filter] border-l-2 border-[#00eaff]/40 pl-6 py-2 transition-all duration-500 hover:border-[#7c6cff] hover:text-white/90"
+              dangerouslySetInnerHTML={{ __html: renderHighlightedPara(para) }}
+            />
           ))}
         </div>
       </div>
