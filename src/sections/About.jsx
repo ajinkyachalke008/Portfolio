@@ -117,16 +117,21 @@ const AnimatedBebasTextUltra = ({ text }) => {
   );
 };
 const About = () => {
-  const text = `Passionate about clean architecture
-    I build scalable, high-performance solutions
-    from prototype to production`;
-  const aboutText = `Passionate about turning
-complex technical ideas
-into impactful digital solutions.
-Driven to build innovative systems
+  const text = `Passionate about turning complex technical ideas into impactful digital solutions.`;
+  const aboutText = `Driven to build innovative systems
 that bridge engineering knowledge
 with real-world applications.`;
+
+  const bioParas = [
+    "Ajinkya Chalke is a second-year Electrical Engineering student at Government College of Engineering, Karad, driven by a deep curiosity for technology, scientific research, and innovation. He focuses on building advanced digital engineering platforms and AI-powered systems that transform complex technical concepts into practical, real-world solutions.",
+    "His work centers around the intersection of Electrical Engineering, Artificial Intelligence, and intelligent software systems, where he develops projects such as AI-driven engineering platforms, electrical simulation environments, and security technologies. Through these projects, he aims to bridge the traditional gap between academic theory and real-world engineering applications.",
+    "Ajinkya is particularly interested in exploring next-generation technologies, emerging scientific discoveries, and startup-driven innovation, with the goal of creating impactful systems that improve how engineers learn, design, and solve global technological challenges.",
+    "He believes that the future of engineering lies in combining deep technical knowledge with intelligent digital platforms, and he continuously works toward building technologies that push the boundaries of modern engineering and research.",
+  ];
+
   const imgRef = useRef(null);
+  const bioRef = useRef(null);
+
   useGSAP(() => {
     gsap.to("#about", {
       scale: 0.95,
@@ -149,7 +154,23 @@ with real-world applications.`;
       ease: "power4.out",
       scrollTrigger: { trigger: imgRef.current },
     });
+
+    // Bio paragraphs staggered fade-in
+    gsap.from(".bio-para", {
+      opacity: 0,
+      y: 30,
+      filter: "blur(6px)",
+      duration: 1,
+      stagger: 0.25,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: bioRef.current,
+        start: "top 85%",
+        toggleActions: "play none none reverse",
+      },
+    });
   });
+
   return (
     <section id="about" className="min-h-screen bg-black rounded-b-4xl">
       <AnimatedHeaderSection
@@ -159,7 +180,7 @@ with real-world applications.`;
         textColor={"text-white"}
         withScrollTrigger={true}
       />
-      <div className="flex flex-col items-center justify-between gap-16 px-10 pb-16 text-xl font-light tracking-wide lg:flex-row md:text-2xl lg:text-3xl text-white/60">
+      <div className="flex flex-col items-center justify-between gap-16 px-10 pb-8 text-xl font-light tracking-wide lg:flex-row md:text-2xl lg:text-3xl text-white/60">
         <img
           ref={imgRef}
           src={mohamedfawzi}
@@ -167,6 +188,20 @@ with real-world applications.`;
           className="w-md rounded-3xl"
         />
         <AnimatedBebasTextUltra text={aboutText} />
+      </div>
+
+      {/* Detailed Biography */}
+      <div ref={bioRef} className="px-10 lg:px-20 pb-20 pt-8">
+        <div className="max-w-5xl mx-auto flex flex-col gap-6">
+          {bioParas.map((para, index) => (
+            <p
+              key={index}
+              className="bio-para font-space text-[16px] md:text-[18px] lg:text-[20px] text-white/70 leading-[1.8] tracking-wide will-change-[transform,opacity,filter]"
+            >
+              {para}
+            </p>
+          ))}
+        </div>
       </div>
     </section>
   );
