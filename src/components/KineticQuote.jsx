@@ -28,44 +28,44 @@ const KineticQuote = () => {
     }, []);
 
     useGSAP(() => {
-        // 1. Bi-Directional Horizontal Scroll Tickers
+        // 1. Bi-Directional Horizontal Scroll Tickers (Stabilized & Detailed)
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: containerRef.current,
                 start: "top center",
-                end: "+=1500", // Length of scroll duration
-                scrub: 0.8,    // Smoothness
-                pin: true,     // Pin the section while scrolling the text
+                end: "+=2000", // Longer duration for more "detained" stable feel
+                scrub: 1.2,    // Extra smooth scrub
+                pin: true,
                 anticipatePin: 1,
             },
         });
 
         // Initial setup for the rows
         gsap.set([line1Ref.current, line2Ref.current], { opacity: 0 });
-        gsap.set(line1Ref.current, { x: "-100vw" }); // Row 1 starts left
-        gsap.set(line2Ref.current, { x: "100vw" });  // Row 2 starts right
+        gsap.set(line1Ref.current, { x: "-60vw" }); // Reduced offset for stability
+        gsap.set(line2Ref.current, { x: "60vw" });
 
         tl.to([line1Ref.current, line2Ref.current], {
             opacity: 1,
             duration: 0.1,
         })
             .to(line1Ref.current, {
-                x: "100vw", // Moves from Left to Right
-                ease: "none",
+                x: "60vw", // Moves from Left to Right
+                ease: "power1.inOut",
                 duration: 1,
             }, 0)
             .to(line2Ref.current, {
-                x: "-100vw", // Moves from Right to Left
-                ease: "none",
+                x: "-60vw", // Moves from Right to Left
+                ease: "power1.inOut",
                 duration: 1,
             }, 0);
 
-        // 2. Infinite Image Shuffle Loop (Reverse direction: Left to Right)
+        // 2. Infinite Image Shuffle Loop (Left to Right)
         const scrollWidth = 5 * (window.innerWidth / 4 + 24);
         gsap.set(".image-track", { x: `-${scrollWidth / 2}px` });
         gsap.to(".image-track", {
             x: "0px",
-            duration: 25,
+            duration: 30, // Slower for detailing
             repeat: -1,
             ease: "none",
         });
@@ -166,10 +166,11 @@ const KineticQuote = () => {
                     return (
                         <span
                             key={index}
-                            className={`wave-char inline-block transition-transform will-change-[font-weight,transform] ${isNeonLayer && (!isSpace && !isDot) ? "drop-shadow-[0_0_8px_rgba(0,234,255,1)]" : ""} ${charClasses}`}
+                            className={`wave-char inline-block transition-transform will-change-[font-weight,transform] ${isNeonLayer && (!isSpace && !isDot) ? "drop-shadow-[0_0_12px_rgba(0,234,255,1)]" : ""} ${charClasses}`}
                             style={{
                                 minWidth: isSpace ? "0.3em" : "auto",
-                                fontFamily: "'Space Grotesk', sans-serif"
+                                fontFamily: "'Space Grotesk', sans-serif",
+                                textShadow: !isNeonLayer ? "2px 2px 4px rgba(0,0,0,0.15), 0px 4px 10px rgba(0,0,0,0.1)" : "none"
                             }}
                         >
                             {isSpace ? "\u00A0" : char}
@@ -240,14 +241,14 @@ const KineticQuote = () => {
             <div className="relative z-10 w-full transition-opacity duration-300 pointer-events-none flex flex-col gap-8 md:gap-16">
 
                 {/* Row 1: Left to Right */}
-                <div ref={line1Ref} className="relative">
-                    {/* Base Layer */}
-                    <div ref={baseTextRef} className="text-black opacity-30 select-none">
+                <div ref={line1Ref} className="relative py-4">
+                    {/* Base Layer - High Contrast */}
+                    <div ref={baseTextRef} className="text-black/85 select-none drop-shadow-sm">
                         {renderTextContent(line1Text, false)}
                     </div>
                     {/* Neon Layer (Revealed via Mask) */}
                     <div
-                        className="absolute top-0 left-0 text-[#00eaff] transition-opacity duration-300"
+                        className="absolute top-0 left-0 text-[#00eaff] transition-opacity duration-300 py-4"
                         style={{
                             opacity: isHovered ? 1 : 0,
                             clipPath: "circle(180px at var(--x, 50%) var(--y, 50%))",
@@ -258,14 +259,14 @@ const KineticQuote = () => {
                 </div>
 
                 {/* Row 2: Right to Left */}
-                <div ref={line2Ref} className="relative">
-                    {/* Base Layer */}
-                    <div className="text-black opacity-30 select-none">
+                <div ref={line2Ref} className="relative py-4">
+                    {/* Base Layer - High Contrast */}
+                    <div className="text-black/85 select-none drop-shadow-sm">
                         {renderTextContent(line2Text, false, true)}
                     </div>
                     {/* Neon Layer (Revealed via Mask) */}
                     <div
-                        className="absolute top-0 left-0 text-[#00eaff] transition-opacity duration-300"
+                        className="absolute top-0 left-0 text-[#00eaff] transition-opacity duration-300 py-4"
                         style={{
                             opacity: isHovered ? 1 : 0,
                             clipPath: "circle(180px at var(--x, 50%) var(--y, 50%))",
