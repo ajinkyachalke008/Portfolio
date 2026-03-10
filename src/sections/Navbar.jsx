@@ -3,6 +3,7 @@ import { socials } from "../constants";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { Link } from "react-scroll";
+import { Icon } from "@iconify/react";
 
 const Navbar = () => {
   const navRef = useRef(null);
@@ -124,26 +125,34 @@ const Navbar = () => {
           className="flex flex-col flex-wrap justify-between gap-8 md:flex-row"
         >
           <div className="font-light">
-            <p className="tracking-wider text-white/50">E-mail</p>
-            <p className="text-xl tracking-widest lowercase text-pretty">
-              mohamedfawzeix@gmail.com
-            </p>
+            <p className="tracking-wider text-white/50 font-bebas text-2xl">E-mail</p>
+            <a href="mailto:ajinkyachalke008@gmail.com" className="font-bebas text-[28px] md:text-[36px] tracking-wide text-pretty hover:text-white transition-colors duration-300">
+              ajinkyachalke008@gmail.com
+            </a>
           </div>
           <div className="font-light">
-            <p className="tracking-wider text-white/50">Social Media</p>
-            <div className="flex flex-col flex-wrap md:flex-row gap-x-2">
-              {socials.map((social, index) => (
-                <a
-                  key={index}
-                  href={social.href}
-                  className="text-sm leading-loose tracking-widest uppercase hover:text-white transition-colors duration-300"
-                  target="_blank"
-                >
-                  {"{ "}
-                  {social.name}
-                  {" }"}
-                </a>
-              ))}
+            <p className="tracking-wider text-white/50 font-bebas text-2xl">Social Media</p>
+            <div className="flex flex-col flex-wrap md:flex-row gap-x-6 gap-y-2 mt-2">
+              {socials.map((social, index) => {
+                let iconName = "";
+                if (social.name === "GitHub") iconName = "mdi:github";
+                else if (social.name === "LinkedIn") iconName = "mdi:linkedin";
+                else if (social.name === "Instagram") iconName = "mdi:instagram";
+                else if (social.name === "CV") iconName = "mdi:file-document-outline";
+
+                return (
+                  <a
+                    key={index}
+                    href={social.href !== "#" ? social.href : undefined}
+                    className="flex items-center gap-2 font-bebas text-[24px] md:text-[32px] tracking-wider hover:text-white transition-colors duration-300"
+                    target={social.href !== "#" ? "_blank" : "_self"}
+                    rel="noreferrer"
+                  >
+                    <Icon icon={iconName} className="text-[28px] md:text-[36px]" />
+                    {social.name}
+                  </a>
+                );
+              })}
             </div>
           </div>
         </div>
