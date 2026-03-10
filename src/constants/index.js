@@ -141,13 +141,13 @@ export const projects = [
       { id: 4, name: "CSS3" },
     ],
   },
- {
+  {
     id: 6,
     name: "Gaming Hub (High Performance Landing Page)",
     description:
       "A modern, high-performance landing page dedicated to the gaming community. This project achieved outstanding Google Lighthouse scores (98% Performance, 100% Best Practices) by optimizing asset delivery, minimizing unused JavaScript, and adhering to modern web performance standards.",
     href: "https://gaming-website-plum-kappa.vercel.app/",
-    image: "/assets/projects/gaming.png", 
+    image: "/assets/projects/gaming.png",
     bgImage: "/assets/projects/gaming.png",
     frameworks: [
       { id: 1, name: "React.js" },
@@ -158,12 +158,8 @@ export const projects = [
   },
 ];
 export const socials = [
-  { name: "Instagram", href: "https://www.instagram.com/mohamedfawzix/" },
-  { name: "LinkedIn", href: "https://www.linkedin.com/in/mohamed--fawzi" },
-
-  { name: "GitHub", href: "https://github.com/MohamedxFawzi" },
-  {
-    name: "CV",
-    href: "https://drive.google.com/file/d/18eZI-y0WaREOYVGwBOuGfaiz0QTqUgoO/view?usp=sharing",
-  },
+  { name: "GitHub", href: "https://github.com/ajinkyachalke008" },
+  { name: "LinkedIn", href: "#" },
+  { name: "Instagram", href: "#" },
+  { name: "CV", href: "#" },
 ];
