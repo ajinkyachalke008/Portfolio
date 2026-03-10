@@ -161,6 +161,7 @@ const Hero = () => {
           title={"Hi, I'm Ajinkya."}
           text={""}
           textColor={"text-white"}
+          scrambleTitle={true}
         />
         <div className="w-full max-w-[1400px] px-10 relative mt-4 md:mt-12 text-start z-40">
           <AdvancedKineticText text1={text1} text2={text2} />
