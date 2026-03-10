@@ -118,9 +118,6 @@ const AnimatedBebasTextUltra = ({ text }) => {
 };
 const About = () => {
   const text = `Passionate about turning complex technical ideas into impactful digital solutions.`;
-  const aboutText = `Driven to build innovative systems
-that bridge engineering knowledge
-with real-world applications.`;
 
   const bioParas = [
     "Ajinkya Chalke is a second-year Electrical Engineering student at Government College of Engineering, Karad, driven by a deep curiosity for technology, scientific research, and innovation. He focuses on building advanced digital engineering platforms and AI-powered systems that transform complex technical concepts into practical, real-world solutions.",
@@ -180,14 +177,13 @@ with real-world applications.`;
         textColor={"text-white"}
         withScrollTrigger={true}
       />
-      <div className="flex flex-col items-center justify-between gap-16 px-10 pb-8 text-xl font-light tracking-wide lg:flex-row md:text-2xl lg:text-3xl text-white/60">
+      <div className="flex flex-col items-center justify-center gap-16 px-10 pb-8 text-xl font-light tracking-wide md:text-2xl lg:text-3xl text-white/60">
         <img
           ref={imgRef}
           src={mohamedfawzi}
           alt="Ajinkya Chalke"
           className="w-md rounded-3xl"
         />
-        <AnimatedBebasTextUltra text={aboutText} />
       </div>
 
       {/* Detailed Biography */}
