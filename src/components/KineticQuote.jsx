@@ -184,7 +184,7 @@ const KineticQuote = () => {
     return (
         <div
             ref={containerRef}
-            className="relative w-full min-h-screen bg-white overflow-hidden flex items-center justify-start cursor-crosshair z-0"
+            className="relative w-full h-[45vh] bg-white overflow-hidden flex items-center justify-start cursor-crosshair z-0"
             onMouseMove={handleMouseMove}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
@@ -238,7 +238,7 @@ const KineticQuote = () => {
             <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#00eaff]/5 to-transparent opacity-50 blur-[100px] pointer-events-none" />
 
             {/* Ticker Container mapped to Scroll */}
-            <div className="relative z-10 w-full transition-opacity duration-300 pointer-events-none flex flex-col gap-8 md:gap-16">
+            <div className="relative z-10 w-full transition-opacity duration-300 pointer-events-none flex flex-col gap-0">
 
                 {/* Row 1: Left to Right */}
                 <div ref={line1Ref} className="relative py-4">
