@@ -128,8 +128,8 @@ const SpiderManMask = () => {
     }
   }, [showMask, isMobile, idleMaskPosition]);
 
-  const finalMaskScale = isMobile ? 0.05 : 0.062;
-  const finalMaskPosition = isMobile ? [0, 0.4, 0] : [0, 0, 0];
+  const finalMaskScale = isMobile ? 0.055 : 0.064;
+  const finalMaskPosition = isMobile ? [0.41, 0.01, 0] : [0.41, 0.02, 0];
 
   return (
     <section className="relative w-full min-h-screen overflow-hidden pt-20 flex flex-col items-center bg-[#020617]">
@@ -175,7 +175,7 @@ const SpiderManMask = () => {
 
       <div
         ref={containerRef}
-        className="relative w-full max-w-[950px] h-[550px] md:h-[700px] !cursor-pointer z-10"
+        className="relative w-full max-w-[700px] h-[600px] md:h-[750px] !cursor-pointer z-10 mx-auto"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={handleMouseLeave}
         onMouseMove={(e) => handleMove(e.clientX, e.clientY)}
@@ -188,96 +188,104 @@ const SpiderManMask = () => {
         }
         onTouchEnd={handleMouseLeave}
       >
-        <img
-          src="/images/hero.png"
-          alt="Mohamed Fawzi"
-          className="absolute inset-0 w-full h-full object-cover z-10 transition-transform duration-300 ease-out !cursor-pointer"
-          style={{
-            objectPosition: "top center",
-            transformOrigin: "top center",
-            transform: `translate3d(${mousePos.x}px, ${mousePos.y}px, 0) scale(${isMobile ? 1.2 : 1.21})`,
-          }}
-        />
-
         <div
-          className={`absolute inset-0 z-15 pointer-events-none transition-opacity duration-300 animate-scanner !cursor-pointer ${isHovered ? "opacity-0" : "opacity-100"}`}
+          className="absolute inset-0 w-full h-full transition-transform duration-300 ease-out"
           style={{
-            transform: `translate3d(${mousePos.x}px, ${mousePos.y}px, 0)`,
+            transform: `translate3d(${mousePos.x}px, ${mousePos.y}px, 0) scale(${isMobile ? 1.15 : 1.1})`,
+            transformOrigin: "center center"
           }}
         >
-          <Canvas
-            camera={{ position: [0, 0, -12], fov: 22, near: 0.1, far: 50 }}
-          >
-            <Suspense fallback={null}>
-              <ambientLight intensity={1} />
-              <SpiderManSymbiote
-                wireframeMode={true}
-                scale={finalMaskScale}
-                position={finalMaskPosition}
-                mousePos={mousePos}
-              />
-              <Environment preset="city" />
-            </Suspense>
-          </Canvas>
-        </div>
+          <img
+            src="/images/hero.png"
+            alt="Ajinkya"
+            className="absolute inset-0 w-full h-full object-contain z-10 !cursor-pointer"
+            style={{ objectPosition: "center center" }}
+          />
 
-        <div
-          ref={hoverCanvasRef}
-          className="absolute inset-0 z-20 pointer-events-none transition-opacity duration-300 ease-out"
-          style={{
-            transform: `translate3d(${mousePos.x}px, ${mousePos.y}px, 0)`,
-            WebkitMaskImage: verticalScannerMask,
-            maskImage: verticalScannerMask,
-            WebkitMaskRepeat: "no-repeat",
-            maskRepeat: "no-repeat",
-      
-            WebkitMaskPosition: idleMaskPosition,
-            maskPosition: idleMaskPosition,
-            opacity: 0,
-          }}
-        >
-          <Canvas
-            shadows
-            transparent
-            camera={{ position: [0, 0, -12], fov: 22, near: 0.1, far: 50 }}
+          <div
+            className="absolute inset-0 z-15 pointer-events-none"
             style={{
-              pointerEvents: isHovered ? "auto" : "none",
-              touchAction: "none",
+              WebkitMaskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
+              maskImage: 'linear-gradient(to bottom, black 85%, transparent 100%)',
             }}
           >
-            <Suspense fallback={null}>
-              <ambientLight intensity={2} />
-              <directionalLight
-                position={[0, 5, 5]}
-                intensity={4}
-                color="#ffffff"
-              />
-              <spotLight position={[5, 5, -5]} intensity={5} color="#ff4444" />
+            <div
+              className={`absolute inset-0 transition-opacity duration-300 animate-scanner ${isHovered ? "opacity-0" : "opacity-100"}`}
+            >
+              <Canvas
+                camera={{ position: [0, 0, -12], fov: 22, near: 0.1, far: 50 }}
+              >
+                <Suspense fallback={null}>
+                  <ambientLight intensity={1} />
+                  <directionalLight position={[-5, 5, 5]} intensity={1.5} />
+                  <SpiderManSymbiote
+                    wireframeMode={true}
+                    scale={finalMaskScale}
+                    position={finalMaskPosition}
+                    mousePos={mousePos}
+                  />
+                  <Environment preset="city" />
+                </Suspense>
+              </Canvas>
+            </div>
 
-              <SpiderManSymbiote
-                wireframeMode={false}
-                scale={finalMaskScale}
-                position={finalMaskPosition}
-                mousePos={mousePos}
-              />
-              <Environment resolution={256} preset="city">
-                <group rotation={[-Math.PI / 3, 4, 1]}>
-                  <Lightformer
-                    form={"circle"}
+            <div
+              ref={hoverCanvasRef}
+              className="absolute inset-0 transition-opacity duration-300 ease-out"
+              style={{
+                WebkitMaskImage: verticalScannerMask,
+                maskImage: verticalScannerMask,
+                WebkitMaskRepeat: "no-repeat",
+                maskRepeat: "no-repeat",
+                WebkitMaskPosition: idleMaskPosition,
+                maskPosition: idleMaskPosition,
+                opacity: 0,
+              }}
+            >
+              <Canvas
+                shadows
+                transparent
+                camera={{ position: [0, 0, -12], fov: 22, near: 0.1, far: 50 }}
+                style={{
+                  pointerEvents: isHovered ? "auto" : "none",
+                  touchAction: "none",
+                }}
+              >
+                <Suspense fallback={null}>
+                  <ambientLight intensity={2} />
+                  <directionalLight
+                    position={[0, 5, 5]}
                     intensity={4}
-                    position={[0, 5, -9]}
-                    scale={10}
+                    color="#ffffff"
                   />
-                  <Lightformer
-                    form={"circle"}
-                    intensity={4}
-                    position={[0, 3, 1]}
-                    scale={10}
+                  <spotLight position={[5, 5, -5]} intensity={5} color="#ff4444" />
+
+                  <SpiderManSymbiote
+                    wireframeMode={false}
+                    scale={finalMaskScale}
+                    position={finalMaskPosition}
+                    mousePos={mousePos}
                   />
-                </group>
-              </Environment>
-            </Suspense>
-          </Canvas>
+                  <Environment resolution={256} preset="city">
+                    <group rotation={[-Math.PI / 3, 4, 1]}>
+                      <Lightformer
+                        form={"circle"}
+                        intensity={4}
+                        position={[0, 5, -9]}
+                        scale={10}
+                      />
+                      <Lightformer
+                        form={"circle"}
+                        intensity={4}
+                        position={[0, 3, 1]}
+                        scale={10}
+                      />
+                    </group>
+                  </Environment>
+                </Suspense>
+              </Canvas>
+            </div>
+          </div>
         </div>
       </div>
     </section>

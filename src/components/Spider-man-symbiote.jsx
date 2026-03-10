@@ -20,7 +20,7 @@ export default function SpiderManSymbiote({
 
       meshGroupRef.current.rotation.y = THREE.MathUtils.lerp(
         meshGroupRef.current.rotation.y,
-        targetRotationY + Math.PI, 
+        targetRotationY + Math.PI,
         delta * 3,
       );
       meshGroupRef.current.rotation.x = THREE.MathUtils.lerp(
@@ -47,34 +47,36 @@ export default function SpiderManSymbiote({
 
   return (
     <group {...props} dispose={null}>
-      <group ref={meshGroupRef}>
-        <group rotation={[1.732, 0.011, 0]}>
-          <group rotation={[-Math.PI, 0, 0]}>
-            <group
-              position={[0, 0, 0]} 
-              rotation={[0.23, 0, Math.PI]}
-            >
-              <mesh geometry={nodes.BlackSpidey001_Red_0.geometry}>
-                {renderMaterial(materials.material)}
-              </mesh>
-              <mesh geometry={nodes.BlackSpidey001_Black_0.geometry}>
-                {renderMaterial(materials.Black)}
-              </mesh>
-              <mesh geometry={nodes.BlackSpidey001_EyeCloth_0.geometry}>
-                {renderMaterial(materials.EyeCloth)}
-              </mesh>
-              <mesh geometry={nodes.BlackSpidey001_Web_0.geometry}>
-                {renderMaterial(materials.material_3)}
-              </mesh>
-              <mesh geometry={nodes.BlackSpidey001_Web_0_1.geometry}>
-                {renderMaterial(materials.material_3)}
-              </mesh>
-              <mesh geometry={nodes.BlackSpidey001_Web_0_2.geometry}>
-                {renderMaterial(materials.material_3)}
-              </mesh>
-              <mesh geometry={nodes.BlackSpidey001_Glass_0.geometry}>
-                {renderMaterial(materials.Glass)}
-              </mesh>
+      <group position={[0, -28, 0]} ref={meshGroupRef}>
+        <group position={[0, 28, 0]}>
+          <group rotation={[1.732, 0, 0]}>
+            <group rotation={[-Math.PI, 0, 0]}>
+              <group
+                position={[0, 0, 0]}
+                rotation={[0.23, 0, Math.PI]}
+              >
+                <mesh geometry={nodes.BlackSpidey001_Red_0.geometry}>
+                  {renderMaterial(materials.material)}
+                </mesh>
+                <mesh geometry={nodes.BlackSpidey001_Black_0.geometry}>
+                  {renderMaterial(materials.Black)}
+                </mesh>
+                <mesh geometry={nodes.BlackSpidey001_EyeCloth_0.geometry}>
+                  {renderMaterial(materials.EyeCloth)}
+                </mesh>
+                <mesh geometry={nodes.BlackSpidey001_Web_0.geometry}>
+                  {renderMaterial(materials.material_3)}
+                </mesh>
+                <mesh geometry={nodes.BlackSpidey001_Web_0_1.geometry}>
+                  {renderMaterial(materials.material_3)}
+                </mesh>
+                <mesh geometry={nodes.BlackSpidey001_Web_0_2.geometry}>
+                  {renderMaterial(materials.material_3)}
+                </mesh>
+                <mesh geometry={nodes.BlackSpidey001_Glass_0.geometry}>
+                  {renderMaterial(materials.Glass)}
+                </mesh>
+              </group>
             </group>
           </group>
         </group>

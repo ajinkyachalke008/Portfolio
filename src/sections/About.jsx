@@ -8,9 +8,7 @@ const About = () => {
   const text = `Passionate about clean architecture
     I build scalable, high-performance solutions
     from prototype to production`;
-  const aboutText = `I am Mohamed Fawzi, a motivated web developer specializing in Theme Building and designing appealing user interfaces (UI/UX).
-I have a strong passion for creating interactive websites that come alive with smooth animation, and I am always keen to learn and apply new animation techniques to elevate the user experience.
-Currently, I am actively building my expertise in the modern frontend landscape by mastering React.js for developing scalable web applications, and I use package management systems like GPM for efficient project workflow.`;
+  const aboutText = `I am a student at the Government College of Engineering, Karad, with a passion for building digital products that look great and function perfectly. From designing 'Setu', a campus skill-bartering app, to developing the 'EE Zone' platform, I love turning complex ideas into intuitive user experiences. Whether I'm wiring circuits or designing branding for events like the Masur Premier League, I focus on crafting clean, user-centric solutions.`;
   const imgRef = useRef(null);
   useGSAP(() => {
     gsap.to("#about", {
