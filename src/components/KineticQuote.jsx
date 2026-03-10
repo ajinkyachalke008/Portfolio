@@ -188,17 +188,17 @@ const KineticQuote = () => {
                     {[...Array(3)].map((_, loopIdx) => (
                         <React.Fragment key={loopIdx}>
                             {[1, 2, 3, 4, 5].map((item, index) => (
-                                <div key={`${loopIdx}-${index}`} className="flex-none w-[20vw] md:w-[15vw] aspect-[3/4] relative rounded-2xl overflow-hidden shadow-2xl mix-blend-multiply transition-transform duration-500 hover:scale-110">
+                                <div key={`${loopIdx}-${index}`} className="flex-none w-[20vw] md:w-[15vw] aspect-[3/4] relative rounded-2xl overflow-hidden shadow-2xl mix-blend-multiply transition-all duration-700 hover:scale-105 hover:z-20 group">
                                     <img
                                         src={`/images/photo${item}.jpg`}
                                         alt={`Ajinkya Achievement ${item}`}
-                                        className="object-cover w-full h-full grayscale"
+                                        className="object-cover w-full h-full grayscale-[0.4] saturate-[0.8] brightness-[1.05] transition-all duration-700 group-hover:grayscale-0 group-hover:saturate-100"
                                         onError={(e) => {
                                             e.target.onerror = null;
                                             e.target.src = `https://placehold.co/600x800/e2e8f0/94a3b8?text=Photo+${item}`;
                                         }}
                                     />
-                                    <div className="absolute inset-0 border border-black/5 rounded-2xl" />
+                                    <div className="absolute inset-0 border border-black/5 rounded-2xl pointer-events-none" />
                                 </div>
                             ))}
                         </React.Fragment>
