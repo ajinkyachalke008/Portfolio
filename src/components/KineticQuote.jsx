@@ -16,18 +16,7 @@ const KineticQuote = () => {
 
     const [init, setInit] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
-
-    const quoteParts = [
-        { text: "Let’s", type: "normal" },
-        { text: " transform ", type: "normal" },
-        { text: "ideas", type: "normal" },
-        { text: " into ", type: "normal" },
-        { text: "powerful", type: "accent" },
-        { text: " innovations ", type: "normal" },
-        { text: "that shape the future ", type: "normal" },
-        { text: "with", type: "normal" },
-        { text: " AJINKYA.", type: "highlight" },
-    ];
+    // Removed unused quoteParts array
 
     // Initialize Particles
     useEffect(() => {
@@ -141,37 +130,34 @@ const KineticQuote = () => {
         }
     };
 
-    const renderTextContent = (isNeonLayer = false) => {
-        let globalCharIndex = 0;
+    const quoteText = "Let’s transform ideas into powerful innovations that shape the future with AJINKYA.";
+    // Finding index of "AJINKYA" to isolate styles
+    const ajinkyaStart = quoteText.indexOf("AJINKYA");
 
+    const renderTextContent = (isNeonLayer = false) => {
         return (
-            <h2 className="flex whitespace-nowrap text-[32px] md:text-[52px] lg:text-[72px] uppercase leading-tight tracking-wide items-center">
-                {quoteParts.map((part, i) => {
-                    // Special styles per part type
-                    let partClasses = "";
-                    if (part.type === "accent") partClasses = "text-white opacity-90 mx-3";
-                    if (part.type === "highlight") partClasses = `keyword-ajinkya font-bold mx-3 ${isNeonLayer ? "text-[#00eaff]" : "text-[#cfa355]"}`;
+            <h2 className="flex whitespace-nowrap text-[32px] md:text-[52px] lg:text-[72px] uppercase leading-tight tracking-wider items-center">
+                {quoteText.split("").map((char, index) => {
+                    const isSpace = char === " ";
+                    // Check if current char is part of the word "AJINKYA"
+                    const isAjinkya = index >= ajinkyaStart && index < ajinkyaStart + 7;
+                    const isDot = char === ".";
+
+                    let charClasses = "";
+                    if (isAjinkya) {
+                        charClasses = isNeonLayer ? "text-[#00eaff] keyword-ajinkya" : "text-[#cfa355] keyword-ajinkya font-bold";
+                    }
 
                     return (
-                        <span key={i} className={`inline-block ${partClasses}`}>
-                            {part.text.split("").map((char, charIdx) => {
-                                const isSpace = char === " ";
-                                const currentIndex = globalCharIndex++;
-
-                                return (
-                                    <span
-                                        key={currentIndex}
-                                        className={`wave-char inline-block transition-transform will-change-[font-weight,transform] ${isNeonLayer && !isSpace ? "drop-shadow-[0_0_8px_rgba(0,234,255,1)]" : ""
-                                            }`}
-                                        style={{
-                                            minWidth: isSpace ? "0.3em" : "auto",
-                                            fontFamily: "'Space Grotesk', sans-serif" // Needs variable font support
-                                        }}
-                                    >
-                                        {isSpace ? "\u00A0" : char}
-                                    </span>
-                                );
-                            })}
+                        <span
+                            key={index}
+                            className={`wave-char inline-block transition-transform will-change-[font-weight,transform] ${isNeonLayer && (!isSpace && !isDot) ? "drop-shadow-[0_0_8px_rgba(0,234,255,1)]" : ""} ${charClasses}`}
+                            style={{
+                                minWidth: isSpace ? "0.3em" : "auto",
+                                fontFamily: "'Space Grotesk', sans-serif"
+                            }}
+                        >
+                            {isSpace ? "\u00A0" : char}
                         </span>
                     );
                 })}
