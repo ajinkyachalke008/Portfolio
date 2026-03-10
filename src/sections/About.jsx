@@ -153,8 +153,8 @@ const About = () => {
     });
 
     // Bio paragraphs — cinematic staggered entrance
-    const bioItems = containerRef.current?.querySelectorAll
-      ? bioRef.current?.querySelectorAll(".bio-para")
+    const bioItems = bioRef.current
+      ? bioRef.current.querySelectorAll(".bio-para")
       : document.querySelectorAll(".bio-para");
 
     bioItems?.forEach((para, i) => {
