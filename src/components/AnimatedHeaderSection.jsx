@@ -4,34 +4,101 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
 const ScrambleText = ({ text }) => {
-  const [displayText, setDisplayText] = useState("");
-  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+<>?";
+  const [charStates, setCharStates] = useState(
+    text.split("").map((char) => ({ char, isScrambled: false }))
+  );
+  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*<>?/";
+  const hoverIntervalRef = useRef(null);
+  const entranceIntervalRef = useRef(null);
 
+  // Entrance Animation
   useEffect(() => {
     let iterations = 0;
-    const interval = setInterval(() => {
-      setDisplayText(
+
+    setCharStates(text.split("").map((char) => ({
+      char: char.trim() ? letters[Math.floor(Math.random() * letters.length)] : " ",
+      isScrambled: !!char.trim()
+    })));
+
+    entranceIntervalRef.current = setInterval(() => {
+      setCharStates((prev) =>
         text.split("").map((letter, index) => {
           if (index < iterations || letter === " ") {
-            return letter;
+            return { char: letter, isScrambled: false };
           }
-          return letters[Math.floor(Math.random() * letters.length)];
-        }).join("")
+          return {
+            char: letters[Math.floor(Math.random() * letters.length)],
+            isScrambled: true,
+          };
+        })
       );
 
       if (iterations >= text.length) {
-        clearInterval(interval);
+        clearInterval(entranceIntervalRef.current);
       }
+      iterations += 1 / 2.5;
+    }, 45);
 
-      // Speed of decryption (lower decimal = more scrambling per letter)
-      iterations += 1 / 3;
-    }, 40);
-
-    return () => clearInterval(interval);
+    return () => clearInterval(entranceIntervalRef.current);
   }, [text]);
 
-  return <span>{displayText}</span>;
-}
+  // Cyberpunk Hover Scramble
+  const handleMouseEnter = () => {
+    clearInterval(entranceIntervalRef.current);
+    if (hoverIntervalRef.current) clearInterval(hoverIntervalRef.current);
+
+    const cyberColors = ["#00eaff", "#ff00e6", "#f2ff00", "#00ff3c", "#ff3300"];
+
+    hoverIntervalRef.current = setInterval(() => {
+      setCharStates(prev => text.split("").map((letter) => {
+        if (letter === " ") return { char: " ", isScrambled: false, color: "#00eaff" };
+        // Randomly glitch 30% of the letters at a time
+        const shouldGlitch = Math.random() < 0.3;
+        return {
+          char: shouldGlitch ? letters[Math.floor(Math.random() * letters.length)] : letter,
+          isScrambled: shouldGlitch,
+          color: shouldGlitch ? cyberColors[Math.floor(Math.random() * cyberColors.length)] : "#00eaff"
+        };
+      }));
+    }, 50);
+  };
+
+  const handleMouseLeave = () => {
+    if (hoverIntervalRef.current) clearInterval(hoverIntervalRef.current);
+
+    // Snap cleanly back to normal
+    setCharStates(text.split("").map((char) => ({ char, isScrambled: false, color: "#00eaff" })));
+  };
+
+  return (
+    <span
+      className="inline-block cursor-crosshair group relative z-50 pointer-events-auto"
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+    >
+      {charStates.map((state, i) => {
+        if (state.char === " ") {
+          return <React.Fragment key={i}>{" "}</React.Fragment>;
+        }
+        return (
+          <span
+            key={i}
+            style={{
+              color: state.isScrambled ? state.color : undefined,
+              textShadow: state.isScrambled ? `0 0 12px ${state.color}` : undefined
+            }}
+            className={`inline-block transition-colors duration-[30ms] relative ${state.isScrambled
+              ? "opacity-100 -skew-x-[15deg] scale-[1.15] font-bold z-10"
+              : "text-inherit group-hover:text-[#00eaff] group-hover:drop-shadow-[0_0_8px_rgba(0,234,255,0.6)] transition-all duration-300"
+              }`}
+          >
+            {state.char}
+          </span>
+        );
+      })}
+    </span>
+  );
+};
 
 const AnimatedHeaderSection = ({
   subTitle,
@@ -83,9 +150,9 @@ const AnimatedHeaderSection = ({
           >
             {subTitle}
           </p>
-          <div className="px-10">
+          <div className="px-10 pb-4 md:pb-8 lg:pb-12">
             <h1
-              className={`flex flex-col gap-12 tracking-tight banner-text-responsive sm:gap-16 md:block ${textColor}`}
+              className={`flex flex-col gap-12 tracking-tight banner-text-responsive sm:gap-16 md:block pb-5 ${textColor}`}
             >
               {scrambleTitle ? (
                 <ScrambleText text={title} />
