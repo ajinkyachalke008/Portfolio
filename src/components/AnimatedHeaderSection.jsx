@@ -3,7 +3,7 @@ import { AnimatedTextLines } from "../components/AnimatedTextLines";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
-const ScrambleText = ({ text }) => {
+export const ScrambleText = ({ text }) => {
   const [charStates, setCharStates] = useState(
     text.split("").map((char) => ({ char, isScrambled: false }))
   );

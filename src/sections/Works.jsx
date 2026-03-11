@@ -28,7 +28,7 @@ const Works = () => {
       ease: "power3.out",
     });
 
-    gsap.from("#project", {
+    gsap.from(".project-item", {
       y: 100,
       opacity: 0,
       delay: 0.5,
@@ -36,7 +36,7 @@ const Works = () => {
       stagger: 0.3,
       ease: "back.out",
       scrollTrigger: {
-        trigger: "#project",
+        trigger: ".project-item",
       },
     });
   }, []);
@@ -105,7 +105,7 @@ const Works = () => {
         subTitle={"Logic meets Aesthetics, Seamlessly"}
         title={"Projects"}
         text={text}
-        textColor={"text-black"}
+        textColor={"text-white"}
         withScrollTrigger={true}
       />
       <div
@@ -115,8 +115,7 @@ const Works = () => {
         {projects.map((project, index) => (
           <a
             key={project.id}
-            id="project"
-            className="relative flex flex-col gap-1 py-5 cursor-pointer group md:gap-0"
+            className="project-item relative flex flex-col gap-1 py-5 cursor-pointer group md:gap-0"
             onMouseEnter={() => handleMouseEnter(index)}
             onMouseLeave={() => handleMouseLeave(index)}
             href={project.href}
@@ -132,20 +131,20 @@ const Works = () => {
             />
 
             {/* title */}
-            <div className="flex justify-between px-10 text-black transition-all duration-500 md:group-hover:px-12 md:group-hover:text-white">
+            <div className="flex justify-between px-10 text-white transition-all duration-500 md:group-hover:px-12 md:group-hover:text-white">
               <h2 className="lg:text-[32px] text-[26px] leading-none">
                 {project.name}
               </h2>
               <Icon icon="lucide:arrow-up-right" className="md:size-6 size-5" />
             </div>
             {/* divider */}
-            <div className="w-full h-0.5 bg-black/80" />
+            <div className="w-full h-0.5 bg-white/20" />
             {/* framework */}
             <div className="flex px-10 text-xs leading-loose uppercase transtion-all duration-500 md:text-sm gap-x-5 md:group-hover:px-12">
               {project.frameworks.map((framework) => (
                 <p
                   key={framework.id}
-                  className="text-black transition-colors duration-500 md:group-hover:text-white"
+                  className="text-white/70 transition-colors duration-500 md:group-hover:text-white"
                 >
                   {framework.name}
                 </p>
@@ -169,7 +168,7 @@ const Works = () => {
         {/* desktop Flaoting preview image */}
         <div
           ref={previewRef}
-          className="fixed -top-2/6 left-0 z-50 overflow-hidden border-8 border-black pointer-events-none w-[960px] md:block hidden opacity-0"
+          className="fixed -top-2/6 left-0 z-50 overflow-hidden border-8 border-white/20 pointer-events-none w-[960px] md:block hidden opacity-0"
         >
           {currentIndex !== null && (
             <img

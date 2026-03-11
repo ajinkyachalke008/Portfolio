@@ -6,6 +6,7 @@ import Services from "./sections/Services";
 import ReactLenis from "lenis/react";
 import About from "./sections/About";
 import Works from "./sections/Works";
+import Marquee from "./components/Marquee";
 import ContactSummary from "./sections/ContactSummary";
 import Contact from "./sections/Contact";
 import { useProgress } from "@react-three/drei";
@@ -42,17 +43,36 @@ const App = () => {
       )}
 
       <div
-        className={`${
-          isReady ? "opacity-100" : "opacity-0"
-        } transition-opacity duration-1000`}
+        className={`${isReady ? "opacity-100" : "opacity-0"
+          } transition-opacity duration-1000`}
       >
         <Navbar />
         <div className="sticky top-0 h-screen w-full z-0">
           <SpiderManMask />
         </div>
-        <div className="relative z-10 bg-white rounded-t-[40px] shadow-[0_-20px_50px_rgba(0,0,0,0.5)] flex flex-col">
+        <div className="relative z-10 bg-black rounded-t-[40px] shadow-[0_-20px_50px_rgba(0,0,0,0.5)] flex flex-col">
           <Hero />
+
+          <div className="w-full relative z-20">
+            <Marquee
+              items={Array(4).fill(["Innovation", "Design", "Development", "Architecture", "Scalability", "Deployment", "APIs"]).flat()}
+              className="text-black bg-[#e2e8f0] py-3 text-2xl lg:text-3xl font-medium tracking-wider shadow-lg"
+              reverse={false}
+              icon="mdi:lightning-bolt"
+            />
+          </div>
+
           <ServiceSummary />
+
+          <div className="w-full relative z-20">
+            <Marquee
+              items={Array(4).fill(["Performance", "Reliability", "Optimization", "Security", "Automation", "Flexibility", "Integrations"]).flat()}
+              className="text-black bg-[#e2e8f0] py-3 text-2xl lg:text-3xl font-medium tracking-wider shadow-lg"
+              reverse={true}
+              icon="mdi:star-four-points"
+            />
+          </div>
+
           <Services />
           <About />
           <Works />

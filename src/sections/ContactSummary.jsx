@@ -17,19 +17,21 @@ const ContactSummary = () => {
   ];
 
   return (
-    <section ref={containerRef} className="w-full relative z-0 flex flex-col justify-center min-h-screen pt-10 pb-10">
+    <section ref={containerRef} className="w-full min-h-screen relative z-0 flex flex-col justify-center overflow-hidden bg-white">
       {/* Top L-to-R Marquee */}
       <Marquee
-        items={items}
+        items={Array(6).fill(items).flat()}
         className="text-black bg-[#f4f4f4] py-2 border-y border-black/10"
         reverse={false}
       />
 
-      <KineticQuote triggerRef={containerRef} />
+      <div className="flex-grow flex items-center justify-center py-20">
+        <KineticQuote triggerRef={containerRef} />
+      </div>
 
       {/* Bottom R-to-L Marquee */}
       <Marquee
-        items={items}
+        items={Array(6).fill(items).flat()}
         className="text-black bg-[#f4f4f4] py-2 border-y border-black/10"
         reverse={true}
       />

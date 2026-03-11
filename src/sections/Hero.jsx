@@ -153,7 +153,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-black"
+      className="relative min-h-[85vh] md:min-h-[90vh] flex flex-col items-center justify-center overflow-hidden bg-black pb-10"
     >
       <div className="w-full mt-4 flex flex-col items-center z-30">
         <AnimatedHeaderSection

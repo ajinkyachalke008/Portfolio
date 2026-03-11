@@ -4,6 +4,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
+import { ScrambleText } from "./AnimatedHeaderSection";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -42,23 +43,12 @@ const KineticQuote = ({ triggerRef }) => {
 
         // Initial setup for the rows
         gsap.set([line1Ref.current, line2Ref.current], { opacity: 0 });
-        gsap.set(line1Ref.current, { x: "-60vw" }); // Reduced offset for stability
-        gsap.set(line2Ref.current, { x: "60vw" });
 
         tl.to([line1Ref.current, line2Ref.current], {
             opacity: 1,
-            duration: 0.1,
-        })
-            .to(line1Ref.current, {
-                x: "60vw", // Moves from Left to Right
-                ease: "power1.inOut",
-                duration: 1,
-            }, 0)
-            .to(line2Ref.current, {
-                x: "-60vw", // Moves from Right to Left
-                ease: "power1.inOut",
-                duration: 1,
-            }, 0);
+            duration: 0.8,
+            ease: "power2.out",
+        });
 
         // 2. Infinite Image Shuffle Loop (Left to Right)
         const scrollWidth = 5 * (window.innerWidth / 4 + 24);
@@ -71,6 +61,7 @@ const KineticQuote = ({ triggerRef }) => {
         });
 
         // 3. Continuous AJINKYA Highlight Pulse
+        // Vibrant Cyan for Neon layer
         gsap.to(".keyword-ajinkya", {
             textShadow: "0px 0px 20px rgba(0, 234, 255, 0.8), 0px 0px 30px rgba(0, 234, 255, 0.6)",
             scale: 1.05,
@@ -80,100 +71,48 @@ const KineticQuote = ({ triggerRef }) => {
             ease: "sine.inOut",
         });
 
+        // Gold glow for AJINKYA layer (+ multi-layer golden depth shadow)
+        gsap.to(".keyword-ajinkya-base", {
+            textShadow: "4px 4px 8px rgba(0,0,0,0.5), 0px 0px 15px rgba(255, 215, 0, 0.8), 0px 0px 25px rgba(255, 184, 0, 0.6)",
+            scale: 1.05,
+            duration: 1.2,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+        });
+
     }, { scope: containerRef });
 
-    // 3. Cursor X-Ray Reveal Mask & Variable Font Wave
     const handleMouseMove = (e) => {
-        if (!cursorMaskRef.current || !containerRef.current || !baseTextRef.current) return;
-
-        const rect = containerRef.current.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-
-        // Update clipping mask position
-        gsap.to(cursorMaskRef.current, {
-            "--x": `${x}px`,
-            "--y": `${y}px`,
-            duration: 0.1,
-            ease: "power2.out",
-        });
-
-        // Variable Font Wave Effect (calc distance from mouse to characters)
-        const chars = baseTextRef.current.querySelectorAll('.wave-char');
-        const maskChars = cursorMaskRef.current.querySelectorAll('.wave-char');
-
-        // Wave radius 
-        const radius = 150;
-        const maxWeight = 800;
-        const minWeight = 300;
-
-        chars.forEach((char, index) => {
-            const charRect = char.getBoundingClientRect();
-            const charX = charRect.left - rect.left + charRect.width / 2;
-            const charY = charRect.top - rect.top + charRect.height / 2;
-
-            const dist = Math.sqrt(Math.pow(x - charX, 2) + Math.pow(y - charY, 2));
-
-            let weight = minWeight;
-            if (dist < radius) {
-                // Interpolate weight based on proximity
-                const intensity = 1 - (dist / radius);
-                weight = minWeight + (maxWeight - minWeight) * intensity;
-            }
-
-            // Apply to both base and neon layer so they match perfectly
-            gsap.to([char, maskChars[index]], {
-                fontWeight: weight,
-                duration: 0.15,
-                ease: "power1.out",
-            });
-        });
+        // Removed highlight logic
     };
 
     const handleMouseEnter = () => setIsHovered(true);
     const handleMouseLeave = () => {
         setIsHovered(false);
-        // Reset weights
-        const chars = baseTextRef.current?.querySelectorAll('.wave-char');
-        const maskChars = cursorMaskRef.current?.querySelectorAll('.wave-char');
-        if (chars && maskChars) {
-            gsap.to([chars, maskChars], {
-                fontWeight: 300,
-                duration: 0.5,
-                ease: "power2.out",
-            });
-        }
     };
 
     const line1Text = "Let’s transform ideas into powerful innovations";
     const line2Text = "that shape the future with AJINKYA.";
-    const ajinkyaStart = line2Text.indexOf("AJINKYA");
-
-    const renderTextContent = (text, isNeonLayer = false, isLine2 = false) => {
+    const renderTextContent = (text, isLine2 = false) => {
         return (
-            <h2 className="flex whitespace-nowrap text-[32px] md:text-[52px] lg:text-[72px] uppercase leading-tight tracking-wider items-center">
-                {text.split("").map((char, index) => {
-                    const isSpace = char === " ";
-                    // Only apply Ajinkya styling if it's Line 2 and within range
-                    const isAjinkya = isLine2 && index >= ajinkyaStart && index < ajinkyaStart + 7;
-                    const isDot = char === ".";
-
-                    let charClasses = "";
-                    if (isAjinkya) {
-                        charClasses = isNeonLayer ? "text-[#00eaff] keyword-ajinkya" : "text-[#cfa355] keyword-ajinkya font-bold";
-                    }
+            <h2 className="flex justify-center flex-wrap text-center text-[16px] sm:text-[20px] md:text-[28px] lg:text-[40px] xl:text-[48px] uppercase leading-tight tracking-wider items-center gap-x-2 md:gap-x-4">
+                {text.split(" ").map((word, wordIndex) => {
+                    // Check if the current word exactly matches "AJINKYA." (with or without punctuation)
+                    const isAjinkyaWord = isLine2 && word.includes("AJINKYA");
 
                     return (
                         <span
-                            key={index}
-                            className={`wave-char inline-block transition-transform will-change-[font-weight,transform] ${isNeonLayer && (!isSpace && !isDot) ? "drop-shadow-[0_0_12px_rgba(0,234,255,1)]" : ""} ${charClasses}`}
+                            key={wordIndex}
+                            className={`inline-block font-bold ${isAjinkyaWord ? "text-[#FFD700] keyword-ajinkya-base" : "text-[#0a0a0a]"}`}
                             style={{
-                                minWidth: isSpace ? "0.3em" : "auto",
                                 fontFamily: "'Space Grotesk', sans-serif",
-                                textShadow: !isNeonLayer ? "2px 2px 4px rgba(0,0,0,0.15), 0px 4px 10px rgba(0,0,0,0.1)" : "none"
+                                textShadow: isAjinkyaWord
+                                    ? "4px 4px 8px rgba(0,0,0,0.5), 0px 4px 16px rgba(0,0,0,0.3)" // GSAP will animate this
+                                    : "4px 4px 8px rgba(0,0,0,0.2)"
                             }}
                         >
-                            {isSpace ? "\u00A0" : char}
+                            <ScrambleText text={word} />
                         </span>
                     );
                 })}
@@ -184,14 +123,14 @@ const KineticQuote = ({ triggerRef }) => {
     return (
         <div
             ref={containerRef}
-            className="relative w-full h-[45vh] bg-white overflow-hidden flex items-center justify-start cursor-crosshair z-0"
+            className="relative w-full h-[60vh] md:h-[70vh] bg-white overflow-hidden flex items-center justify-center cursor-crosshair z-0"
             onMouseMove={handleMouseMove}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
         >
             {/* Background Image Collage Track */}
             <div className="absolute inset-0 z-0 overflow-hidden flex items-center pointer-events-none">
-                <div className="image-track flex gap-4 md:gap-8 min-w-[200%] opacity-[0.12]">
+                <div className="image-track flex gap-4 md:gap-8 min-w-[200%] opacity-40">
                     {[...Array(3)].map((_, loopIdx) => (
                         <React.Fragment key={loopIdx}>
                             {[1, 2, 3, 4, 5].map((item, index) => (
@@ -238,41 +177,21 @@ const KineticQuote = ({ triggerRef }) => {
             <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#00eaff]/5 to-transparent opacity-50 blur-[100px] pointer-events-none" />
 
             {/* Ticker Container mapped to Scroll */}
-            <div className="relative z-10 w-full transition-opacity duration-300 pointer-events-none flex flex-col gap-0">
+            <div className="relative z-10 w-full px-10 h-full transition-opacity duration-300 pointer-events-none flex flex-col items-center justify-center gap-2 overflow-hidden">
 
-                {/* Row 1: Left to Right */}
-                <div ref={line1Ref} className="relative py-4">
+                {/* Row 1 */}
+                <div ref={line1Ref} className="relative py-2 w-full flex justify-center items-center">
                     {/* Base Layer - High Contrast */}
-                    <div ref={baseTextRef} className="text-black/85 select-none drop-shadow-sm">
+                    <div ref={baseTextRef} className="text-[#121212]/85 select-none drop-shadow-sm flex justify-center">
                         {renderTextContent(line1Text, false)}
-                    </div>
-                    {/* Neon Layer (Revealed via Mask) */}
-                    <div
-                        className="absolute top-0 left-0 text-[#00eaff] transition-opacity duration-300 py-4"
-                        style={{
-                            opacity: isHovered ? 1 : 0,
-                            clipPath: "circle(180px at var(--x, 50%) var(--y, 50%))",
-                        }}
-                    >
-                        {renderTextContent(line1Text, true)}
                     </div>
                 </div>
 
-                {/* Row 2: Right to Left */}
-                <div ref={line2Ref} className="relative py-4">
+                {/* Row 2 */}
+                <div ref={line2Ref} className="relative py-2 w-full flex justify-center items-center">
                     {/* Base Layer - High Contrast */}
-                    <div className="text-black/85 select-none drop-shadow-sm">
-                        {renderTextContent(line2Text, false, true)}
-                    </div>
-                    {/* Neon Layer (Revealed via Mask) */}
-                    <div
-                        className="absolute top-0 left-0 text-[#00eaff] transition-opacity duration-300 py-4"
-                        style={{
-                            opacity: isHovered ? 1 : 0,
-                            clipPath: "circle(180px at var(--x, 50%) var(--y, 50%))",
-                        }}
-                    >
-                        {renderTextContent(line2Text, true, true)}
+                    <div className="text-[#121212]/85 select-none drop-shadow-sm flex justify-center">
+                        {renderTextContent(line2Text, true)}
                     </div>
                 </div>
 
